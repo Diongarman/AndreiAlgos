@@ -21,21 +21,32 @@ class LinkedList {
     this.tail = this.head;
     this.length = 1;
   }
+
+  prepend(value) {
+
+    let head = {
+      value: value,
+      next: this.head
+    }
+
+    this.head = head
+    this.length++
+     
+
+
+  }
   append(value) {
     //Code here
-    let ref = this.head;
-    
-    while (ref.next) {
-      ref = ref.next
-    }
-    
-    ref.next = {
+    const newNode = {
       value: value,
       next: null
     }
 
-    this.tail = ref.next  
-    this.length++
+    this.tail.next = newNode; 
+
+    //update object state
+    this.tail = newNode
+    this.length++;
   }
 }
 
@@ -43,5 +54,6 @@ let myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.append(17);
+myLinkedList.prepend(7)
 
 console.log(myLinkedList)
