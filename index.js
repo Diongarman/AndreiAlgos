@@ -27,6 +27,19 @@ class LinkedList {
     this.length = 1;
   }
 
+  printList() {
+    let curr = this.head
+
+    let array = []
+    while(curr) {
+      array.push(curr.value)
+
+      curr = curr.next
+    }
+
+    return array;
+  }
+
   prepend(value) {
 
     let newNode = new Node(value)
@@ -53,33 +66,35 @@ class LinkedList {
     return this
   }
 
+  traverseToIndex(index) {
 
+    let counter = 0
+    let current = this.head
+
+    while(counter !== index){
+      current = current.next
+      counter++
+    }
+
+    return current;
+
+}
   insert(i, value) {
     const newNode = new Node(value)
 
-
-    if (i <= 1) {
+    if (i === 0) {
       this.prepend(value)
-      return this
+      return this.printList()
     }
 
+    let leader = this.traverseToIndex(i - 1)
+    let trailer = leader.next
 
-    let prev;
-    let curr = this.head
-   
-    while(i-1>=1) {
-      prev = curr
-      curr = curr.next
-      i--
-    }
-    prev.next = newNode
-    prev.next.next = curr
-
+    leader.next = newNode
+    newNode.next = trailer
     this.length++
-    // console.log(prev)
-    // console.log(curr)
 
-    return this
+    return this.printList()
   }
 }
 
@@ -97,5 +112,5 @@ myLinkedList.append(5);
 myLinkedList.append(16);
 myLinkedList.append(19);
 myLinkedList.prepend(8)
-myLinkedList.insert(2,17)
+myLinkedList.insert(1,174)
 //8-17-10-5-16-19
