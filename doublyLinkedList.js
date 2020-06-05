@@ -1,22 +1,8 @@
-// Create the below linked list:
-// myLinkedList = {
-//   head: {
-//     value: 10
-//     next: {
-//       value: 5
-//       next: {
-//         value: 16
-//         next: null
-//       }
-//     }
-//   }
-// };
-
-
 class Node {
   constructor(value) {
     this.value = value
     this.next = null
+    this.prev = null
   }
 }
 
@@ -45,7 +31,9 @@ class LinkedList {
     let newNode = new Node(value)
     newNode.next = this.head
 
-    //update object state
+    //update LL object state
+
+    this.head.prev = newNode
     this.head = newNode
     this.length++
      
@@ -57,39 +45,78 @@ class LinkedList {
     //Code here
     const newNode = new Node(value)
 
+    //update Node object state
+    newNode.prev = this.tail
     this.tail.next = newNode; 
-
-    //update object state
+    //update LL object state
     this.tail = newNode
     this.length++;
 
     return this
   }
 
+  traverseToIndexFromTail(index) {
+    let counter = this.length;
+    let current = this.tail
+
+    while (counter !== index){
+      current = current.prev
+      counter--
+    }
+    return current
+  }
+
   traverseToIndex(index) {
 
     let counter = 0
-    let current = this.head
+    let current  = this.head
+
+    // if (index <=0) {
+    //   return current;
+    // }
 
     while(counter !== index){
-      current = current.next
-      counter++
-    }
-
+        current = current.next
+        counter++
+        }
+    
     return current;
 
 }
 
   remove(index) {
 
-    if (index >= this.length) {
+    if (index >= this.length || index < 0) {
       throw Error('Index provided is out of bounds')
     }
 
+
+    if (index < 1) {
+      this.head = this.head.next
+      return this.printList()
+    }
+    
     let leader = this.traverseToIndex(index - 1);
+    
+    if(index === this.length - 1) {
+      leader.next = null;
+      this.tail = leader;
+      
+      return this.printList()
+    }
+
+    
+
+    // if (index === 0) {
+    //   this.head = this.head.next;
+    //    return this.printList()
+    // }
+
+    
     let trailer = leader.next.next
 
     leader.next = trailer
+    trailer.prev = leader
     this.length--
 
     return this.printList()
@@ -104,37 +131,20 @@ class LinkedList {
       return this.printList()
     }
 
-    let leader = this.traverseToIndex(i - 1)
-    let trailer = leader.next
-
-    leader.next = newNode
-    newNode.next = trailer
-    this.length++
-
-    return this.printList()
-  }
-
-
-  reverse() {
-
-    if(this.length === 1) {
+    if (i >= this.length) {
+      this.append(value)
       return this.printList()
     }
 
-      let first = this.head;
-      this.tail = this.head;
-      let second = first.next;
-  
-      while(second) {
-        const temp = second.next;
-        second.next = first;
-        first = second;
-        second = temp;
-      }
-  
-      this.head.next = null;
-      this.head = first;
-      return this.printList();
+    let leader = this.traverseToIndex(i - 1)
+    let trailer = leader.next
+    leader.next = newNode
+    newNode.next = trailer
+    newNode.prev = leader
+    trailer.prev = newNode
+    this.length++
+
+    return this.printList()
   }
 }
 
@@ -150,11 +160,12 @@ class LinkedList {
 let myLinkedList = new LinkedList(10);
 myLinkedList.append(5);
 myLinkedList.append(16);
-myLinkedList.append(19);
+// myLinkedList.append(19);
 myLinkedList.prepend(8)
-myLinkedList.insert(1,17)
+myLinkedList.insert(2,17)
 //8-17-10-5-16-19
-myLinkedList.remove(3)
+myLinkedList.remove(0)
+
 //8-17-10-16-19
-myLinkedList.reverse()
+
 

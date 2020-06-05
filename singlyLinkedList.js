@@ -113,29 +113,6 @@ class LinkedList {
 
     return this.printList()
   }
-
-
-  reverse() {
-
-    if(this.length === 1) {
-      return this.printList()
-    }
-
-      let first = this.head;
-      this.tail = this.head;
-      let second = first.next;
-  
-      while(second) {
-        const temp = second.next;
-        second.next = first;
-        first = second;
-        second = temp;
-      }
-  
-      this.head.next = null;
-      this.head = first;
-      return this.printList();
-  }
 }
 
 
@@ -156,5 +133,3 @@ myLinkedList.insert(1,17)
 //8-17-10-5-16-19
 myLinkedList.remove(3)
 //8-17-10-16-19
-myLinkedList.reverse()
-
