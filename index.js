@@ -1,160 +1,74 @@
-// Create the below linked list:
-// myLinkedList = {
-//   head: {
-//     value: 10
-//     next: {
-//       value: 5
-//       next: {
-//         value: 16
-//         next: null
-//       }
-//     }
-//   }
-// };
-
-
 class Node {
-  constructor(value) {
-    this.value = value
-    this.next = null
+  constructor(value){
+    this.value = value;
+    this.next = null;
   }
 }
 
-class LinkedList {
-  constructor(value) {
-    this.head = new Node(value)
-    this.tail = this.head;
-    this.length = 1;
+class Stack {
+  constructor(){
+    this.top = null;
+    this.bottom = null;
+    this.length = 0;
   }
-
-  printList() {
-    let curr = this.head
-
-    let array = []
-    while(curr) {
-      array.push(curr.value)
-
-      curr = curr.next
+  peek() {
+    if (this.isEmpty()) {
+      return Error('Stack is empty')
     }
 
-    return array;
+    return this.top.value
   }
+  push(value){
+    let node = new Node(value);
+    node.next = this.top;
+    this.top = node
 
-  prepend(value) {
+    if(!this.bottom) {
+      this.bottom = node
+    }
 
-    let newNode = new Node(value)
-    newNode.next = this.head
-
-    //update object state
-    this.head = newNode
     this.length++
-     
-     return this
-
-
   }
-  append(value) {
-    //Code here
-    const newNode = new Node(value)
-
-    this.tail.next = newNode; 
-
-    //update object state
-    this.tail = newNode
-    this.length++;
-
-    return this
-  }
-
-  traverseToIndex(index) {
-
-    let counter = 0
-    let current = this.head
-
-    while(counter !== index){
-      current = current.next
-      counter++
+  pop(){
+    
+    if (this.length === 1) {
+      this.top = null;
+      this.bottom = null
+   
+    } else {
+      this.top = this.top.next
     }
-
-    return current;
-
-}
-
-  remove(index) {
-
-    if (index >= this.length) {
-      throw Error('Index provided is out of bounds')
-    }
-
-    let leader = this.traverseToIndex(index - 1);
-    let trailer = leader.next.next
-
-    leader.next = trailer
+    
     this.length--
 
-    return this.printList()
-    
-    
   }
-  insert(i, value) {
-    const newNode = new Node(value)
-
-    if (i === 0) {
-      this.prepend(value)
-      return this.printList()
+  isEmpty() {
+    if(this.length === 0) {
+      return true
+    } else {
+      return false
     }
-
-    let leader = this.traverseToIndex(i - 1)
-    let trailer = leader.next
-
-    leader.next = newNode
-    newNode.next = trailer
-    this.length++
-
-    return this.printList()
-  }
-
-
-  reverse() {
-
-    if(this.length === 1) {
-      return this.printList()
-    }
-
-      let first = this.head;
-      this.tail = this.head;
-      let second = first.next;
-  
-      while(second) {
-        const temp = second.next;
-        second.next = first;
-        first = second;
-        second = temp;
-      }
-  
-      this.head.next = null;
-      this.head = first;
-      return this.printList();
   }
 }
 
+const myStack = new Stack();
 
-// 1-->2-->3
-// 7-->8-->69-->null
-//insert(2,17)
-// 7-->8-->17
+myStack.push('google');
+myStack.push('udemy');
+myStack.push('pornhub');
+myStack.pop()
+myStack.pop()
+// myStack.pop()
+myStack.peek()
 
 
 
-//8-10-5-16-19
-let myLinkedList = new LinkedList(10);
-myLinkedList.append(5);
-myLinkedList.append(16);
-myLinkedList.append(19);
-myLinkedList.prepend(8)
-myLinkedList.insert(1,17)
-//8-17-10-5-16-19
-myLinkedList.remove(3)
-//8-17-10-16-19
-myLinkedList.reverse()
+
+
+
+
+//Discord
+//Udemy
+//google
+
 

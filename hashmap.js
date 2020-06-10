@@ -59,6 +59,7 @@ class HashTable {
 
     let address = this._hash(k)
 
+    //Task: Swap array for LL
     if(!this.data[address]){
       this.data[address] = []
     }
