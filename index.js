@@ -20,14 +20,17 @@ class Stack {
   }
   push(value){
     let node = new Node(value);
-    node.next = this.top;
-    this.top = node
-
-    if(!this.bottom) {
+    if (this.length === 0) {
+      this.top = node;
       this.bottom = node
+    } else {
+      let temp = this.top;
+      this.top = node
+      this.top.next = temp
     }
 
     this.length++
+    return this
   }
   pop(){
     
@@ -56,10 +59,13 @@ const myStack = new Stack();
 myStack.push('google');
 myStack.push('udemy');
 myStack.push('pornhub');
-myStack.pop()
-myStack.pop()
 // myStack.pop()
-myStack.peek()
+// myStack.pop()
+// myStack.pop()
+// myStack.peek()
+
+
+
 
 
 
