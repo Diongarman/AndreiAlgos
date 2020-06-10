@@ -1,52 +1,28 @@
-class Node {
-  constructor(value){
-    this.value = value;
-    this.next = null;
-  }
-}
-
 class Stack {
   constructor(){
-    this.top = null;
-    this.bottom = null;
-    this.length = 0;
+    this.array = []
   }
   peek() {
     if (this.isEmpty()) {
-      return Error('Stack is empty')
+      return Error('Stack is empty, can not peek')
     }
 
-    return this.top.value
+    return this.array[this.array.length - 1]
   }
   push(value){
-    let node = new Node(value);
-    if (this.length === 0) {
-      this.top = node;
-      this.bottom = node
-    } else {
-      let temp = this.top;
-      this.top = node
-      this.top.next = temp
-    }
 
-    this.length++
-    return this
+    this.array.push(value)
+   
+    return this.array
   }
   pop(){
-    
-    if (this.length === 1) {
-      this.top = null;
-      this.bottom = null
-   
-    } else {
-      this.top = this.top.next
-    }
-    
-    this.length--
+
+    this.array.pop()
+    return this.array
 
   }
   isEmpty() {
-    if(this.length === 0) {
+    if(this.array.length === 0) {
       return true
     } else {
       return false
@@ -58,11 +34,12 @@ const myStack = new Stack();
 
 myStack.push('google');
 myStack.push('udemy');
-myStack.push('pornhub');
+myStack.push('discord');
+myStack.pop()
+myStack.pop()
+myStack.pop()
 // myStack.pop()
-// myStack.pop()
-// myStack.pop()
-// myStack.peek()
+myStack.peek()
 
 
 
