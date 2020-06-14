@@ -38,25 +38,25 @@ class BinarySearchTree {
  
   }
   lookup(value){
+
+
     let curr = this.root
 
-    while (true) {
+    if (!curr) {
+      return null
+    }
+
+    while (curr) {
       if (value < curr.value){
-        if (!curr.left) {
-       
-          return null
-        }
         curr = curr.left
       } else if (value > curr.value) {
-
-        if (!curr.right) {
-          return null
-        }
         curr = curr.right
-      } else {
+      } else if (value === curr.value) {
         return curr
       }
     } 
+
+    return false
 
   }
   // remove
@@ -71,7 +71,7 @@ tree.insert(170)
 tree.insert(15)
 tree.insert(1)
 JSON.stringify(traverse(tree.root))
-tree.lookup(99)
+tree.lookup(9)
 
 //     9
 //  4     20
