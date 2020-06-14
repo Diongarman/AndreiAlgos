@@ -20,26 +20,22 @@ class BinarySearchTree {
     }
 
     while (curr) {
-      if (value < curr.value && !curr.left){
-        curr.left = newNode
-        break
-      } else if (value > curr.value && !curr.right) {
-        curr.right = newNode
-        break
-      } else if (value < curr.value) {
+      if (value < curr.value){
+        if (!curr.left) {
+          curr.left = newNode
+          break
+        }
         curr = curr.left
       } else if (value > curr.value) {
+
+        if (!curr.right) {
+          curr.right = newNode
+          break
+        }
         curr = curr.right
-      }
-    }
-
-
-
-
-    
+      } 
+    }    
     return this
-
-
   }
   lookup(value){
     //Code here
