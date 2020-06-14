@@ -13,29 +13,24 @@ class BinarySearchTree {
   insert(value){
     let newNode = new Node(value)
     let curr = this.root
-
     if (!this.root) {
       this.root = newNode
       return this
     }
 
-    while (curr) {
-      if (value < curr.value && !curr.left){
-        curr.left = newNode
-        break
-      } else if (value > curr.value && !curr.right) {
-        curr.right = newNode
-        break
-      } else if (value < curr.value) {
+    while (curr.left || curr.right) {
+      if (value < curr.left.value) {
         curr = curr.left
-      } else if (value > curr.value) {
+      } else if (value > curr.right.value) {
         curr = curr.right
       }
     }
 
-
-
-
+    if (value < curr.value) {
+        curr.left = newNode
+      } else {
+        curr.right = newNode
+      }
     
     return this
 
@@ -67,10 +62,6 @@ function traverse(node) {
   tree.right = node.right === null ? null : traverse(node.right);
   return tree;
 }
-
-
-
-
 
 
 
