@@ -39,7 +39,6 @@ class BinarySearchTree {
   }
   lookup(value){
 
-
     let curr = this.root
 
     if (!curr) {
@@ -57,9 +56,33 @@ class BinarySearchTree {
     } 
 
     return false
+  }
+  remove(value) {
+
+    let current = this.lookup(value)
+
+    let rightSubTree = current.right;
+
+    let leaf = rightSubTree;
+
+    let prev;
+    while (leaf.left) {
+      prev = leaf
+      leaf = leaf.left
+    }
+
+
+   
+    prev.left = null
+
+    leaf.left = current.left
+    leaf.right = current.right
+    
+    
+
+    return leaf
 
   }
-  // remove
 }
 
 const tree = new BinarySearchTree();
@@ -71,7 +94,7 @@ tree.insert(170)
 tree.insert(15)
 tree.insert(1)
 JSON.stringify(traverse(tree.root))
-tree.lookup(9)
+tree.remove(9)
 
 //     9
 //  4     20
