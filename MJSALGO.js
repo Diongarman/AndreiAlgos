@@ -1,5 +1,5 @@
-function randomFloat(a,b) {
-    return [a, Math.round( (Math.random()*(a-b)+b).toFixed(2) * 1e2 )/1e2];
+function randomInt(a,b) {
+    return [a, Math.floor( (Math.random()*(a-b)+b))];
 }
 
 
@@ -8,7 +8,7 @@ function pairs(time, cuts) {
     let lowerBound = 0
     let track;
     while(cuts > 1) {
-        track = randomFloat(lowerBound,time)
+        track = randomInt(lowerBound,time)
         blocks.push(track)
         lowerBound = track[1]
         cuts--
