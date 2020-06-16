@@ -58,29 +58,37 @@ class BinarySearchTree {
     return false
   }
   remove(value) {
+//     9
+//  4     20
+//1  6  15  170
+    
 
     let current = this.lookup(value)
-
     let rightSubTree = current.right;
 
-    let leaf = rightSubTree;
-
-    let prev;
-    while (leaf.left) {
-      prev = leaf
-      leaf = leaf.left
+    let parentNode = rightSubTree;
+    //left most traversal
+    while (rightSubTree.left) {
+      parentNode = rightSubTree
+      rightSubTree = rightSubTree.left
     }
-
-
    
-    prev.left = null
+    // remove leftmost node
 
-    leaf.left = current.left
-    leaf.right = current.right
+  
+      parentNode.left = null
+  
+    
+
+    rightSubTree.left = current.left
+    rightSubTree.right = current.right
+
+    //update object state
+    // this.root = rightSubTree
     
     
 
-    return leaf
+    return rightSubTree
 
   }
 }
@@ -94,7 +102,7 @@ tree.insert(170)
 tree.insert(15)
 tree.insert(1)
 JSON.stringify(traverse(tree.root))
-tree.remove(9)
+tree.remove(4)
 
 //     9
 //  4     20
