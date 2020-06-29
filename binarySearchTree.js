@@ -13,33 +13,84 @@ class BinarySearchTree {
   insert(value){
     let newNode = new Node(value)
     let curr = this.root
+
     if (!this.root) {
       this.root = newNode
       return this
     }
 
-    while (curr.left || curr.right) {
-      if (value < curr.left.value) {
+    while (true) {
+      if (value < curr.value){
+        if (!curr.left) {
+          curr.left = newNode
+          return this
+        }
         curr = curr.left
-      } else if (value > curr.right.value) {
+      } else if (value > curr.value) {
+
+        if (!curr.right) {
+          curr.right = newNode
+          return this
+        }
         curr = curr.right
-      }
-    }
-
-    if (value < curr.value) {
-        curr.left = newNode
-      } else {
-        curr.right = newNode
-      }
-    
-    return this
-
-
+      } 
+    }    
+ 
   }
   lookup(value){
-    //Code here
+
+    let curr = this.root
+
+    if (!curr) {
+      return null
+    }
+
+    while (curr) {
+      if (value < curr.value){
+        curr = curr.left
+      } else if (value > curr.value) {
+        curr = curr.right
+      } else if (value === curr.value) {
+        return curr
+      }
+    } 
+
+    return false
   }
-  // remove
+  remove(value) {
+//     9
+//  4     20
+//1  6  15  170
+    
+
+    let current = this.lookup(value)
+    let rightSubTree = current.right;
+
+    let parentNode = rightSubTree;
+    //left most traversal
+    while (rightSubTree.left) {
+      parentNode = rightSubTree
+      rightSubTree = rightSubTree.left
+    }
+   
+    // remove leftmost node
+
+  
+      parentNode.left = null
+  
+    
+
+    rightSubTree.left = current.left
+    rightSubTree.right = current.right
+
+    //update object state
+    // this.root = rightSubTree
+    
+    
+
+    return rightSubTree
+
+  }
 }
 
 const tree = new BinarySearchTree();
@@ -51,6 +102,7 @@ tree.insert(170)
 tree.insert(15)
 tree.insert(1)
 JSON.stringify(traverse(tree.root))
+tree.remove(4)
 
 //     9
 //  4     20
@@ -62,6 +114,10 @@ function traverse(node) {
   tree.right = node.right === null ? null : traverse(node.right);
   return tree;
 }
+
+
+
+
 
 
 

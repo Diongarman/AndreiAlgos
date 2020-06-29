@@ -1,125 +1,64 @@
-class Node {
-  constructor(value){
-    this.left = null;
-    this.right = null;
-    this.value = value;
-  }
-}
+class Graph { 
+  constructor() { 
+    this.numberOfNodes = 0;
+    this.adjacentList = {
+    }; 
+  } 
+  addVertex(node)  { 
 
-class BinarySearchTree {
-  constructor(){
-    this.root = null;
-  }
-  insert(value){
-    let newNode = new Node(value)
-    let curr = this.root
-
-    if (!this.root) {
-      this.root = newNode
-      return this
+    if (this.adjacentList.hasOwnProperty(node) ) {
+      return;
     }
 
-    while (true) {
-      if (value < curr.value){
-        if (!curr.left) {
-          curr.left = newNode
-          return this
-        }
-        curr = curr.left
-      } else if (value > curr.value) {
+    this.adjacentList[node] = []
+  } 
+  addEdge(node1, node2) { 
+    //undirected Graph 
 
-        if (!curr.right) {
-          curr.right = newNode
-          return this
-        }
-        curr = curr.right
+    if (this.adjacentList.hasOwnProperty(node1) && this.adjacentList.hasOwnProperty(node2)) {
+      this.adjacentList[node1].push(node2);
+      this.adjacentList[node2].push(node1);
+    }
+
+
+  } 
+  showConnections() { 
+    const allNodes = Object.keys(this.adjacentList); 
+    for (let node of allNodes) { 
+      let nodeConnections = this.adjacentList[node]; 
+      let connections = ""; 
+      let vertex;
+      for (vertex of nodeConnections) {
+        connections += vertex + " ";
       } 
-    }    
- 
-  }
-  lookup(value){
-
-    let curr = this.root
-
-    if (!curr) {
-      return null
-    }
-
-    while (curr) {
-      if (value < curr.value){
-        curr = curr.left
-      } else if (value > curr.value) {
-        curr = curr.right
-      } else if (value === curr.value) {
-        return curr
-      }
+      console.log(node + "-->" + connections); 
     } 
+} 
+} 
 
-    return false
-  }
-  remove(value) {
-//     9
-//  4     20
-//1  6  15  170
-    
+const myGraph = new Graph();
+myGraph.addVertex('0');
+myGraph.addVertex('1');
+myGraph.addVertex('2');
+myGraph.addVertex('3');
+myGraph.addVertex('4');
+myGraph.addVertex('5');
+myGraph.addVertex('6');
+myGraph.addEdge('3', '1'); 
+myGraph.addEdge('3', '4'); 
+myGraph.addEdge('4', '2'); 
+myGraph.addEdge('4', '5'); 
+myGraph.addEdge('1', '2'); 
+myGraph.addEdge('1', '0'); 
+myGraph.addEdge('0', '2'); 
+myGraph.addEdge('6', '5');
 
-    let current = this.lookup(value)
-    let rightSubTree = current.right;
-
-    let parentNode = rightSubTree;
-    //left most traversal
-    while (rightSubTree.left) {
-      parentNode = rightSubTree
-      rightSubTree = rightSubTree.left
-    }
-   
-    // remove leftmost node
-
-  
-      parentNode.left = null
-  
-    
-
-    rightSubTree.left = current.left
-    rightSubTree.right = current.right
-
-    //update object state
-    // this.root = rightSubTree
-    
-    
-
-    return rightSubTree
-
-  }
-}
-
-const tree = new BinarySearchTree();
-tree.insert(9)
-tree.insert(4)
-tree.insert(6)
-tree.insert(20)
-tree.insert(170)
-tree.insert(15)
-tree.insert(1)
-JSON.stringify(traverse(tree.root))
-tree.remove(4)
-
-//     9
-//  4     20
-//1  6  15  170
-
-function traverse(node) {
-  const tree = { value: node.value };
-  tree.left = node.left === null ? null : traverse(node.left);
-  tree.right = node.right === null ? null : traverse(node.right);
-  return tree;
-}
-
-
-
-
-
-
-
-
-
+myGraph.showConnections(); 
+//Answer:
+// 0-->1 2 
+// 1-->3 2 0 
+// 2-->4 1 0 
+// 3-->1 4 
+// 4-->3 2 5 
+// 5-->4 6 
+// 6-->5
