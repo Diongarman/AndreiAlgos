@@ -1,32 +1,19 @@
-//Implement a function that reverses a string using iteration...and then recursion!
-function reverseString(str) {
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
-  str = str.split('')
+function bubbleSort(array) {
 
-  if (str.length === 1) {
-    
-    return str
+  let temp
+  for(let i = 0; i < array.length;i++) {
+    for (let j = i + 1; j < array.length; j++){
+      if (array[i] > array[j]) {
+        temp = array[j]
+        array[j] = array[i]
+        array[i] = temp
+      }
+    }
   }
-  
-  return str.pop() + reverseString(str.join(''))
-
+  return array
 }
 
-// reverseString('yoyo mastery')
-//should return: 'yretsam oyoy'
-
-
-function reverseStringIterative(str) {
-
-  str = str.split('')
-  let ans = []
-
-  for(let i = 0; i < str.length+1; i++) {
-    // console.log(str[str.length -i])
-    ans.push(str[str.length -i])
-     
-  } 
-  return ans.join('')
-
-}
-reverseStringIterative('yoyo mastery')
+bubbleSort(numbers);
+console.log(numbers);
