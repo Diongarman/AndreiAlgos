@@ -1,34 +1,32 @@
-// Given a number N return the index value of the Fibonacci sequence, where the sequence is:
+//Implement a function that reverses a string using iteration...and then recursion!
+function reverseString(str) {
 
-// 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 ...
-// the pattern of the sequence is that each value is the sum of the 2 previous values, that means that for N=5 → 2+3
+  str = str.split('')
 
-//For example: fibonacciRecursive(6) should return 8
-
-function fibonacciIterative(n){
-  //code here;
-
-  let a = 0;
-  let b = 1;
-  let temp = a + b
-
-  for (let i = 2; i <= n; i++) {
-    temp = a + b
-    a = b
-    b = temp
+  if (str.length === 1) {
+    
+    return str
   }
-  return temp
-}
-fibonacciIterative(3);
+  
+  return str.pop() + reverseString(str.join(''))
 
-function fibonacciRecursive(n) {
-  //code here;
-  if (n <= 1) {
-    return n
-  }
-
-  return fibonacciRecursive(n-1) + fibonacciRecursive(n-2)
 }
 
-fibonacciRecursive(3)
-// fibonacciIterative(6)
+// reverseString('yoyo mastery')
+//should return: 'yretsam oyoy'
+
+
+function reverseStringIterative(str) {
+
+  str = str.split('')
+  let ans = []
+
+  for(let i = 0; i < str.length+1; i++) {
+    // console.log(str[str.length -i])
+    ans.push(str[str.length -i])
+     
+  } 
+  return ans.join('')
+
+}
+reverseStringIterative('yoyo mastery')
