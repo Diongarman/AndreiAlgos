@@ -1,19 +1,32 @@
 const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
 
-function bubbleSort(array) {
+function selectionSort(array) {
 
-  let temp
-  for(let i = 0; i < array.length;i++) {
-    for (let j = i + 1; j < array.length; j++){
-      if (array[i] > array[j]) {
-        temp = array[j]
-        array[j] = array[i]
-        array[i] = temp
-      }
+  let {length} = array
+  let minimum;
+  let temp;
+  let swapIndex
+
+  for(let i = 0; i < length; i++ ) {
+      for(let j = i+1; j < length; j++ ) {
+        if (array[j] < array[i]) {
+          minimum = array[j]
+          swapIndex = j
+     
+        }
     }
+
+    if (minimum !== null) {
+      temp = array[i];
+      array[i] = minimum;
+      array[swapIndex] = temp
+      minimum = null
+    }
+    
   }
+
   return array
+  
 }
 
-bubbleSort(numbers);
-console.log(numbers);
+selectionSort(numbers);
