@@ -8,9 +8,13 @@
 function fibonacciIterative(n){
   //code here;
 
+  if (n < 2) {
+    return n
+  }
+
   let a = 0;
   let b = 1;
-  let temp = a + b
+  let temp;
 
   for (let i = 2; i <= n; i++) {
     temp = a + b
@@ -30,5 +34,5 @@ function fibonacciRecursive(n) {
   return fibonacciRecursive(n-1) + fibonacciRecursive(n-2)
 }
 
-fibonacciRecursive(3)
-// fibonacciIterative(6)
+//fibonacciRecursive(3)
+fibonacciIterative(10)
