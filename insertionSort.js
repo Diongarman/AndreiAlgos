@@ -1,31 +1,57 @@
-const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+const numbers = [5,4,3,2,1];
 
+
+//While loop logic stolen from mycodeschool
 function insertionSort(array) {
   let {length} = array
 
-  let sorted = []
-  sorted.push(array.shift())
+  let hole
+  let value;
 
-  for (let i = 0; i < length - 1; i++ ) {
-    
-    for (let j = 0; j < sorted.length; j++) {
-      if (array[i]< sorted[j]) {
-        sorted.unshift(array[i])
-        break
-      } else if (array[i] > sorted[j] && array[i] < sorted[j+1]) {
-        sorted.splice(j+1,0,array[i])
-        break
-      } else if (!sorted[j+1]) {
-        sorted.push(array[i])
-        break
-      } 
-      
+  for (let i = 1; i < length; i++) {
+    value = array[i]
+    hole = i
 
+    while(hole > 0 && array[hole - 1] > value) {
+      //console.log(array)
+      array[hole] = array[hole - 1];
+      hole--
     }
+    
+    array[hole] = value
   }
-  console.log(sorted)
-  return sorted
+  
 }
+
+
+// function insertionSort(array) {
+//   let {length} = array
+//   //init boundary
+//   let boundary = 0;
+
+//   let value;
+
+//   for (let i = 1; i < length; i++) {
+//     value = array[i]
+
+//     for (let j = i-1; j >= 0; j--) {
+//       let temp;
+
+//       if (array[j] > value) {
+//         temp = array[j]
+//         array[j+1] = temp
+//         array[j] = value
+//       } 
+//     }
+//   }
+  
+// }
 
 insertionSort(numbers);
 console.log(numbers);
+
+/*
+
+Implemented using abstract explanation from: https://www.youtube.com/watch?v=i-SKeOcBwko
+
+*/
