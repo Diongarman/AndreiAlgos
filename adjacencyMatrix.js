@@ -1,3 +1,70 @@
+module.exports = {
+    greatestNProducts: function (matrix, size) {
+
+  let high = 0;
+  let total = 1;
+
+  //Do checks to make sure matrix dimensions and number of adjacent //elements aren't an issue
+  
+  
+  //scans rows
+  for (let r = 0; r < matrix.length; r++) {
+    for (let i = 0; i <= matrix[r].length - size; i++) {
+      for (let j = 0;j < size;j++) {
+        total *= matrix[r][j+i]
+      }
+      if (total > high) {
+        high = total
+      }
+      total = 1
+    }
+  }
+
+  //scan columns
+  for (let i = 0; i <= matrix.length - size; i++) {
+    for (let c = 0; c < matrix[i].length; c++) {
+      for (let k = 0;k < size;k++) {
+        total *= matrix[i + k][c]
+      }
+      if (total > high) {
+          high = total
+        }
+        total = 1
+    }  
+  }
+  return high
+}
+,
+    greatest4Products: function (matrix) {
+      let greatest;
+
+      // CHECK COMBINATIONS HORIZONTALY
+      for (let r = 0; r < matrix.length; r++) {
+        for (let i = 0; i < matrix[r].length - 4 + 1; i++) {
+          const product = matrix[r][i] * matrix[r][i + 1] * matrix[r][i + 2] * matrix[r][i + 3];
+          if (typeof greatest === 'undefined' || product > greatest) {
+            greatest = product;
+          }
+        }
+      }
+
+      // CHECK COMBINATIONS VERTICALY
+      for (let c = 0; c < matrix[0].length; c++) {
+        for (let i = 0; i < matrix.length - 4 + 1; i++) {
+          const product = matrix[i][c] * matrix[i + 1][c] * matrix[i + 2][c] * matrix[i + 3][c];
+          if (typeof greatest === 'undefined' || product > greatest) {
+            greatest = product;
+          }
+        }
+      }
+
+      return greatest;
+    }
+
+};
+
+
+
 let nums = [[1, 2, 3, 4, 5], 
             [6, 7, 8, 9, 10], 
             [11,12,13,14,15],
@@ -35,69 +102,9 @@ const m = [
 ];
 
 
-function maxSubArray(matrix, size) {
-
-  let high = 0;
-  let total = 1;
-
-  //Do checks to make sure matrix dimensions and number of adjacent //elements aren't an issue
-  
-  
-  //scans rows
-  for (let r = 0; r < matrix.length; r++) {
-    for (let i = 0; i <= matrix[r].length - size; i++) {
-      for (let j = 0;j < size;j++) {
-        total *= matrix[r][j+i]
-      }
-      if (total > high) {
-        high = total
-      }
-      total = 1
-    }
-  }
-
-  //scan columns
-  for (let i = 0; i <= matrix.length - size; i++) {
-    for (let c = 0; c < matrix[i].length; c++) {
-      for (let k = 0;k < size;k++) {
-        total *= matrix[i + k][c]
-      }
-      if (total > high) {
-          high = total
-        }
-        total = 1
-    }  
-  }
-  return high
-}
 
 
 //https://gist.github.com/josecarneiro/e362b3884f58db21b1a120879b702a26?fbclid=IwAR02CaqI30UCWt4qi2tT1eeGNT4afjFJE6kCHX8x1Jav9dFxMS-nONVOiyU
-function greatestProduct(matrix) {
-  let greatest;
 
-  // CHECK COMBINATIONS HORIZONTALY
-  for (let r = 0; r < matrix.length; r++) {
-    for (let i = 0; i < matrix[r].length - 4 + 1; i++) {
-      const product = matrix[r][i] * matrix[r][i + 1] * matrix[r][i + 2] * matrix[r][i + 3];
-      if (typeof greatest === 'undefined' || product > greatest) {
-        greatest = product;
-      }
-    }
-  }
-
-  // CHECK COMBINATIONS VERTICALY
-  for (let c = 0; c < matrix[0].length; c++) {
-    for (let i = 0; i < matrix.length - 4 + 1; i++) {
-      const product = matrix[i][c] * matrix[i + 1][c] * matrix[i + 2][c] * matrix[i + 3][c];
-      if (typeof greatest === 'undefined' || product > greatest) {
-        greatest = product;
-      }
-    }
-  }
-
-  return greatest;
-}
-
-maxSubArray(nums, 4)
+//maxSubArray(nums, 4)
 //greatestProduct(m)
