@@ -1,4 +1,4 @@
-const mergeSort = require('./mergeSort.js');
+const mergeSort = require('./sorting/mergeSort');
 mergeSort();
 
 
