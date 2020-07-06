@@ -1,5 +1,9 @@
-const mergeSort = require('./sorting/mergeSort');
-mergeSort();
+// const mergeSort = require('./sorting/mergeSort');
+// mergeSort();
+
+const quickSort = require('./sorting/quickSort');
+quickSort();
+
 
 
 // const {greatestNProducts, greatest4Products} = require('./adjacencyMatrix.js');
