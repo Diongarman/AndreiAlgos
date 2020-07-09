@@ -12,6 +12,57 @@ class BinarySearchTree {
     this.root = null;
   }
 
+/*
+DFS
+
+inOrder -> [1,4,6,9,15,20,170]
+K
+preOrder --> [9,4,1,6,20,15,170]
+  -useful for rebuilding tree
+
+postOrder --> [1,6,4,15,170,20,9]
+  -children first
+
+
+*/
+    _traverseInorder(node, list) {
+      //recursion says - keep drilling down until reach leaf
+      if(node.left) this._traverseInorder(node.left, list)
+      list.push(node.value)
+      if(node.right)this._traverseInorder(node.right, list)
+      
+      return `DFS inOrder: ${list}`
+    }
+
+
+    _traversePostorder(node, list) {
+      if(node.left) this._traversePostorder(node.left, list);
+      if(node.right) this._traversePostorder(node.right,list);
+      list.push(node.value)
+
+      return `DFS postOrder: ${list}`
+    }
+//     9
+//  4     20
+//1  6  15  170
+
+    _traversePreOrder(node, list){
+      list.push(node.value)
+      if(node.left) this._traversePreOrder(node.left,list)
+      if(node.right) this._traversePreOrder(node.right,list)
+      return `DFS preOrder: ${list}`
+    }
+
+    DFSInorder() {
+      return this._traverseInorder(this.root,[])
+    }
+    DFSPostorder() {
+      return this._traversePostorder(this.root,[])
+    }
+
+    DFSPreorder() { 
+      return this._traversePreOrder(this.root,[])
+    }
 
    breadthFirstSearchR(queue, list) {
      
@@ -189,14 +240,17 @@ tree.insert(170)
 tree.insert(15)
 tree.insert(1)
 //tree.remove(170)
-console.log(JSON.stringify(traverse(tree.root)))
+//console.log(JSON.stringify(traverse(tree.root)))
 
-console.log(tree.breadthFirstSearchR([tree.root], []))
+// console.log(tree.breadthFirstSearchR([tree.root], []))
+
+console.log(tree.DFSPreorder())
 
 
-//     9
-//  4     20
-//1  6  15  170
+
+
+
+
 
 function traverse(node) {
   const tree = { value: node.value };
