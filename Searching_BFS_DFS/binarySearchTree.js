@@ -12,6 +12,10 @@ class BinarySearchTree {
     this.root = null;
   }
 
+//     9
+//  4     20
+//1  6  15  170
+
 /*
 DFS
 
@@ -42,9 +46,7 @@ postOrder --> [1,6,4,15,170,20,9]
 
       return `DFS postOrder: ${list}`
     }
-//     9
-//  4     20
-//1  6  15  170
+
 
     _traversePreOrder(node, list){
       list.push(node.value)

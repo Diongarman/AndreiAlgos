@@ -18,6 +18,6 @@
 
 
 
-const traversingBST = require('./SearchingBFSDFS/binarySearchTree');
+const traversingBST = require('./Searching_BFS_DFS/binarySearchTree');
 traversingBST()
 
