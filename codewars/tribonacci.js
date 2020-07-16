@@ -27,7 +27,18 @@ function tribonacci(signature,n) {
 
 }
 
+// function tribonacci(signature, n){
+//   let newArr = [...signature]
+ 
+//   for(let i = 2; i < n-1 ;i++){
+//     newArr.push(newArr[i-2] + newArr[i-1] + newArr[i])
+//   }
+  
+//   return newArr.slice(0,n)
+
+// }
+
 
 //tribonacci([7, 3, 2], 2)
 
-tribonacci([1,1,1], 4)
+tribonacci([1,1,1], 10)
